@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.5/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.5/angular-cookies.js"></script>
+
+    </head>
+    <body>
+        <div  id="TasksApp" ng-app="TasksApp">
+            <h1>Your Tasks are ........</h1>
+        
+            <div ng-controller="TasksController"> 
+                <button id="btnlg_out"  class="btn btn-danger" ng-click="logout()">Logout</button>
+            </div>
+            <br/>
+            <div ng-controller="userProfileController"> 
+                <button id="getProfile" ng-click="getProfile()">User Profile</button>
+            </div>
+        
+        </div>
+        <script type="text/javascript" src="tasks.js"></script>
+        <script src="utils.js"></script>
+    </body>
+
+</html>

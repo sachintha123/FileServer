@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Signup Team Fluid</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+<div class="limiter">
+    
+    <div class="container-login100">
+    
+        <div class="wrap-login100">
+                
+            <div class="login100-pic js-tilt" data-tilt>
+                    <span class="login100-form-title">
+                            Team Fluid
+                        </span>
+                <img src="images/img-01.PNG" alt="IMG">
+            </div>
+            <div class="login100-form validate-form" id="signup">
+                <span class="login100-form-title">
+                     Signup
+                </span>
+                
+                    <div class="wrap-input100 validate-input" data-validate = "Valid first_name is required">
+                        <input class="input100" type="text" id ="txtFirstName"  placeholder="First Name">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate = "Valid last_name is required">
+                      <input class="input100" type="text" id ="txtLastName" placeholder="Last Name">
+                      <span class="focus-input100"></span>
+                      <span class="symbol-input100">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </span>
+                  </div>
+
+                  <div class="wrap-input100 validate-input" data-validate = "Valid user_name is required">
+                    <input class="input100" type="text" id ="txtUserName" placeholder="User Name">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate = "Valid user_name is required">
+                  <input class="input100" type="email" id ="txtEmail" placeholder="E-mail">
+                  <span class="focus-input100"></span>
+                  <span class="symbol-input100">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  </span>
+              </div>
+
+              <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                  <input class="input100" type="password" id ="txtPassword1" placeholder="Password">
+                  <span class="focus-input100"></span>
+                  <span class="symbol-input100">
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                  </span>
+              </div>
+
+              <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                <input class="input100" type="password" id ="re_password" placeholder="Re Enter Password">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                </span>
+            </div>
+                
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" onclick="btn()">
+                            Signup
+                        </button>
+                    </div>
+                
+
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="index.html">
+                        Alredy Have an Account ?
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  function btn() {
+     
+
+      
+     // var UserId = document.getElementById("txtUserId").value;
+      var FirstName = document.getElementById("txtFirstName").value;
+      var LastName = document.getElementById("txtLastName").value;
+      var UserName = document.getElementById("txtUserName").value;
+      var Email = document.getElementById("txtEmail").value;
+      var Password = document.getElementById("txtPassword1").value;
+      var re_password = document.getElementById("re_password").value;
+
+      if(Password === re_password){
+
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+
+             console.log(this.status);
+             if(this.status==200){
+                 alert("User exists");
+             }
+             else if(this.status==404){
+
+              //--------------------------------------------
+
+                    alert("User doesn't exist");
+
+                    var http = new XMLHttpRequest();
+                    http.onreadystatechange=function(){
+                        if(this.readyState==4){
+                            document.getElementById("demo2").innerHTML=http.responseText;
+                       }
+
+                    }; 
+                   http.open("POST", "http://localhost:3000/adduser", true);
+                   http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                   http.send(JSON.stringify({first_name:FirstName,last_name:LastName,user_name:UserName,email:Email,oging_detcol:Password}));
+
+             }
+
+          }
+      };
+         
+      xhttp.open("GET", "http://localhost:3000/userexists/'"+ UserName +"'", true);
+      //xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      //xhttp.send(JSON.stringify({user_name:UserName}));
+      xhttp.send();
+    }
+    else{
+        alert("Enter Correct Password");
+    }
+       
+
+ }   
+
+
+</script>
+
+
+
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendor/select2/select2.min.js"></script>
+<script src="vendor/tilt/tilt.jquery.min.js"></script>
+<script >     
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+
+<script src="js/main.js"></script>
+</body>
+</html>
